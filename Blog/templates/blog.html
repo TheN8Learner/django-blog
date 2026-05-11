@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Accueil — Le Blog{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+    <div class="hero-inner">
+        <p class="hero-label">À la une</p>
+        <h1 class="hero-title">Derniers articles</h1>
+        <p class="hero-sub">Explorez les idées, réflexions et analyses de notre rédaction.</p>
+    </div>
+</section>
+
+<section class="posts-section">
+    <div class="posts-grid">
+
+        {% for post in posts %}
+
+            {% if forloop.first %}
+            <!-- Article mis en avant (premier) -->
+            <article class="post-card post-card--featured">
+                <div class="post-card__meta">
+                    {% if post.category %}
+                    <a href="{% url 'category' post.category.pk %}" class="post-card__category">{{ post.category }}</a>
+                    {% endif %}
+                    <time class="post-card__date">{{ post.created_at|date:"d F Y" }}</time>
+                </div>
+                <h2 class="post-card__title post-card__title--big">
+                    <a href="{% url 'article_details' post.pk %}">{{ post.title }}</a>
+                </h2>
+                <p class="post-card__author">Par <strong>{{ post.author }}</strong></p>
+                <p class="post-card__excerpt">{{ post.content|truncatewords:40 }}</p>
+                <a href="{% url 'article_details' post.pk %}" class="post-card__link">
+                    Lire l'article <span class="arrow">→</span>
+                </a>
+            </article>
+
+            {% else %}
+            <!-- Articles secondaires -->
+            <article class="post-card post-card--secondary">
+                <div class="post-card__meta">
+                    {% if post.category %}
+                    <a href="{% url 'category' post.category.pk %}" class="post-card__category">{{ post.category }}</a>
+                    {% endif %}
+                    <time class="post-card__date">{{ post.created_at|date:"d F Y" }}</time>
+                </div>
+                <h2 class="post-card__title">
+                    <a href="{% url 'article_details' post.pk %}">{{ post.title }}</a>
+                </h2>
+                <p class="post-card__author">Par <strong>{{ post.author }}</strong></p>
+                <p class="post-card__excerpt">{{ post.content|truncatewords:20 }}</p>
+                <a href="{% url 'article_details' post.pk %}" class="post-card__link">
+                    Lire <span class="arrow">→</span>
+                </a>
+            </article>
+            {% endif %}
+
+        {% empty %}
+        <div class="empty-state">
+            <p class="empty-icon">✍</p>
+            <p class="empty-text">Aucun article disponible pour le moment.</p>
+            <p class="empty-sub">Revenez bientôt.</p>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}

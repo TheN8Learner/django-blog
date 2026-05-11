@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}À propos — Le Blog{% endblock %}
+
+{% block content %}
+
+<div class="about-wrapper">
+
+    <!-- Hero -->
+    <section class="about-hero">
+        <div class="about-hero__inner">
+            <p class="about-hero__label">À propos</p>
+            <h1 class="about-hero__title">Apprendre<br><em>en public.</em></h1>
+            <p class="about-hero__sub">
+                Ce blog est mon carnet de bord. J'y documente ce que j'apprends, ce que je construis,
+                et ce que je comprends — pour mieux retenir, et peut-être aider quelqu'un en chemin.
+            </p>
+        </div>
+        <div class="about-hero__line"></div>
+    </section>
+
+    <!-- Contenu principal -->
+    <div class="about-body">
+
+        <!-- Qui je suis -->
+        <section class="about-section">
+            <div class="about-section__label">01</div>
+            <div class="about-section__content">
+                <h2 class="about-section__title">Qui je suis</h2>
+                <p>
+                    Je suis un développeur en apprentissage, passionné par la création de choses concrètes
+                    sur le web. Ce blog est à la fois mon portfolio et mon journal de bord technique.
+                </p>
+                <p>
+                    Je construis avec <strong>Python</strong>, <strong>Django</strong>, et tout ce que je
+                    rencontre en chemin. Chaque article ici est une trace de quelque chose que j'ai
+                    compris — ou que j'essaie encore de comprendre.
+                </p>
+            </div>
+        </section>
+
+        <div class="about-divider"><span></span><span class="diamond">◆</span><span></span></div>
+
+        <!-- Ce que tu trouveras ici -->
+        <section class="about-section">
+            <div class="about-section__label">02</div>
+            <div class="about-section__content">
+                <h2 class="about-section__title">Ce que tu trouveras ici</h2>
+                <ul class="about-list">
+                    <li>
+                        <span class="about-list__icon">→</span>
+                        <div>
+                            <strong>Notes techniques</strong>
+                            <p>Des explications sur ce que j'apprends : Django, Python, HTML/CSS, bases de données...</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="about-list__icon">→</span>
+                        <div>
+                            <strong>Projets & expérimentations</strong>
+                            <p>Ce que je construis, les erreurs que je fais, et comment je les résous.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="about-list__icon">→</span>
+                        <div>
+                            <strong>Réflexions</strong>
+                            <p>Apprendre à coder seul, la progression, les moments de blocage.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="about-divider"><span></span><span class="diamond">◆</span><span></span></div>
+
+        <!-- Pourquoi écrire -->
+        <section class="about-section">
+            <div class="about-section__label">03</div>
+            <div class="about-section__content">
+                <h2 class="about-section__title">Pourquoi écrire ?</h2>
+                <blockquote class="about-quote">
+                    "Si tu ne peux pas l'expliquer simplement, c'est que tu ne le comprends pas encore."
+                </blockquote>
+                <p>
+                    Écrire m'oblige à comprendre vraiment. Quand j'explique un concept ici, je le solidifie
+                    pour moi-même. Si en plus ça aide quelqu'un d'autre c'est un bonus.
+                </p>
+            </div>
+        </section>
+
+        <div class="about-divider"><span></span><span class="diamond">◆</span><span></span></div>
+
+        <!-- CTA -->
+        <section class="about-cta">
+            <p class="about-cta__text">Tu veux voir ce que j'apprends en ce moment ?</p>
+            <a href="{% url 'blog' %}" class="about-cta__btn">Lire les articles →</a>
+        </section>
+
+    </div>
+
+</div>
+
+{% endblock %}

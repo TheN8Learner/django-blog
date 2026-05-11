@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} — Le Blog{% endblock %}
+
+{% block content %}
+
+<div class="article-wrapper">
+
+    <!-- En-tête de l'article -->
+    <header class="article-header">
+        <div class="article-header__inner">
+            <nav class="article-breadcrumb">
+                <a href="{% url 'blog' %}">← Retour aux articles</a>
+            </nav>
+
+            {% if post.category %}
+            <span class="article-category">{{ post.category }}</span>
+            {% endif %}
+
+            <h1 class="article-title">{{ post.title }}</h1>
+
+            <div class="article-byline">
+                <span class="article-author">Par <strong>{{ post.author }}</strong></span>
+                <span class="byline-sep">·</span>
+                <time class="article-date">{{ post.created_at|date:"d F Y" }} à {{ post.created_at|date:"H:i" }}</time>
+            </div>
+
+            <div class="article-divider">
+                <span></span><span class="diamond">◆</span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Corps de l'article -->
+    <div class="article-body">
+        <div class="article-content">
+            {{ post.content|linebreaks }}
+        </div>
+    </div>
+
+    <!-- Pied de l'article -->
+    <footer class="article-footer">
+        <div class="article-footer__inner">
+            <div class="article-footer__divider">
+                <span></span><span class="diamond">◆</span><span></span>
+            </div>
+            {% if post.category %}
+            <div class="article-tags">
+                <span class="tag">{{ post.category }}</span>
+            </div>
+            {% endif %}
+            <a href="{% url 'blog' %}" class="back-link">
+                ← Retour à la liste des articles
+            </a>
+        </div>
+    </footer>
+
+    <!-- Section commentaires -->
+    <section class="comments-section">
+        <div class="comments-inner">
+
+            <h2 class="comments-title">
+                {{ commentaires.count }} commentaire{{ commentaires.count|pluralize }}
+            </h2>
+
+            <div class="comments-list">
+                {% for c in commentaires %}
+                <div class="comment">
+                    <div class="comment__header">
+                        <span class="comment__avatar">{{ c.auteur|slice:":1"|upper }}</span>
+                        <div>
+                            <span class="comment__author">{{ c.auteur }}</span>
+                            {% if c.created_at %}
+                            <time class="comment__date">{{ c.created_at|date:"d F Y à H:i" }}</time>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <p class="comment__text">{{ c.texte }}</p>
+                </div>
+                {% empty %}
+                <p class="comments-empty">Aucun commentaire pour l'instant. Soyez le premier !</p>
+                {% endfor %}
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Save</button>
+            </form>
+
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

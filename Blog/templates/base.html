@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Le Blog{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="header-top">
+                <span class="header-date">{% now "l d F Y" %}</span>
+                <a href="{% url 'blog' %}" class="site-logo">Le<em>Blog</em></a>
+                <span class="header-tagline">Idées · Culture · Réflexions</span>
+            </div>
+            <div class="header-divider">
+                <span></span><span class="diamond">◆</span><span></span>
+            </div>
+            <nav class="site-nav">
+                <a href="{% url 'blog' %}">Accueil</a>
+                <a href="{% url 'about' %}">À propos</a>
+                <a href="{% url 'contact' %}">Contact</a>
+                {% if request.user.is_authenticated %}
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="site-nav__auth nav-logout-btn">Déconnexion</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="site-nav__auth">Connexion</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-logo">Le<em>Blog</em></div>
+            <p class="footer-copy">&copy; {% now "Y" %} — Tous droits réservés</p>
+        </div>
+    </footer>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

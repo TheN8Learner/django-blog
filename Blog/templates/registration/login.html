@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Connexion — Le Blog{% endblock %}
+
+{% block content %}
+
+<div class="login-wrapper">
+
+    <section class="login-hero">
+        <p class="login-hero__label">Espace privé</p>
+        <h1 class="login-hero__title">Se<br><em>connecter.</em></h1>
+        <div class="login-hero__line"></div>
+    </section>
+
+    <div class="login-body">
+
+        {% if form.errors %}
+        <div class="login-error">
+            Identifiants incorrects. Vérifiez votre nom d'utilisateur et mot de passe.
+        </div>
+        {% endif %}
+
+        <form class="login-form" method="POST">
+            {% csrf_token %}
+
+            <div class="login-form__field">
+                <label for="id_username">Nom d'utilisateur</label>
+                {{ form.username }}
+            </div>
+
+            <div class="login-form__field">
+                <label for="id_password">Mot de passe</label>
+                {{ form.password }}
+            </div>
+
+            <input type="hidden" name="next" value="{{ next }}">
+
+            <div class="login-form__footer">
+                <button type="submit" class="login-form__btn">
+                    Connexion <span class="arrow">→</span>
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
