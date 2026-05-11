@@ -135,3 +135,7 @@ STATICFILES_DIRS = [
 # Rediriger vers la page d'accueil après la connexion
 LOGIN_REDIRECT_URL = '/'  # Nom de l'URL ou chemin direct comme '/'
 LOGOUT_REDIRECT_URL = '/'
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://djangoblog.up.railway.app",
+]
